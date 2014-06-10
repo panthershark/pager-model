@@ -1,6 +1,6 @@
 {
   "name": "pager-model",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "main": "index.js",
   "scripts": {
     "test": "mocha -R spec -u tdd test/tests/*.js"
