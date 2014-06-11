@@ -25,13 +25,17 @@ var pagination = function(options) {
 
   var pagination = {
     total: options.total,
-    current_page: Math.ceil(options.start / options.size),
+    current_page: options.start === 0 ? 1 : Math.ceil(options.start / options.size),
     page_size: options.size,
     page_count: (options.total / options.size < 1) ? 1 : Math.ceil(options.total / options.size),
     pages: []
   };
 
   var pageModel = function(page_number) {
+    if (page_number <= 0 || page_number > pagination.page_count) {
+      return null;
+    }
+
     return {
       url: options.url(page_number, options.size),
       vm: options.vm(page_number, options.size),
