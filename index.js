@@ -68,12 +68,20 @@ var pagination = function(options) {
   // 3+ is common math case.
   else if (options.range > 0) {
     var f = pagination.current_page - (options.range / 2);
-    f = (f <= 0 ? 1 : f); // bound check
+    //f = (f <= 0 ? 1 : f); // bound check
 
-    var l = pagination.current_page + (options.range / 2);
+    // var l = pagination.current_page + (options.range / 2);
+
+    if (f <= 0) {
+      var neg_diff = 1 - f;
+      f = f + neg_diff;
+    }
+
+    var l = f + options.range;
+
     l = (l > pagination.page_count ? pagination.page_count : l); // bound check
 
-    for (var i = f; i <= l; i++) {
+    for (var i = f; i < l; i++) {
       pagination.pages.push(pageModel(i));
     }
   }
