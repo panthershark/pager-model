@@ -8,7 +8,7 @@ var _ = require('lodash');
 // @param vm {Function}: hook to DI viewmodel generation
 var pagination = function(options) {
   options = _.defaults(options, {
-    start: 1,
+    start: 0,
     total: 0,
     range: 1,
     size: 10,
@@ -25,7 +25,7 @@ var pagination = function(options) {
 
   var pagination = {
     total: options.total,
-    current_page: options.start === 0 ? 1 : Math.ceil(options.start / options.size),
+    current_page: options.start === 0 ? 1 : Math.ceil((options.start + 1) / options.size),
     page_size: options.size,
     page_count: (options.total / options.size < 1) ? 1 : Math.ceil(options.total / options.size),
     pages: []
